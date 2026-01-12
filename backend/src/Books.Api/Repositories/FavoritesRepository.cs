@@ -4,7 +4,7 @@ using System.Data;
 
 namespace Books.Api.Repositories;
 
-public class FavoritesRepository
+public class FavoritesRepository : IFavoritesRepository
 {
     private readonly string _connectionString;
 
@@ -95,7 +95,6 @@ VALUES (@UserId, @ExternalId, @Title, @Authors, @FirstPublishYear, @CoverId, @Co
         }
         catch (SqlException ex) when (ex.Number is 2601 or 2627)
         {
-            // Unique index (UserId, ExternalId)
             throw new DuplicateNameException("Duplicate favorite for this user.", ex);
         }
     }

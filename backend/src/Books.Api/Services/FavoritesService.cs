@@ -7,9 +7,9 @@ namespace Books.Api.Services;
 public class FavoritesService
 {
     private const int UserId = 1; // simplificación para la prueba
-    private readonly FavoritesRepository _repo;
+    private readonly IFavoritesRepository _repo;
 
-    public FavoritesService(FavoritesRepository repo)
+    public FavoritesService(IFavoritesRepository repo)
     {
         _repo = repo;
     }
@@ -35,7 +35,9 @@ public class FavoritesService
         var authorsList = dto.Authors
             .Select(a => a?.Trim())
             .Where(a => !string.IsNullOrWhiteSpace(a))
+            .Select(a => a!) // <- fuerza no-null después del filtro
             .ToList();
+
 
         if (authorsList.Count == 0)
             return (false, 400, "Authors debe tener al menos 1 autor.", null);

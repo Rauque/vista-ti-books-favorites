@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IFavoritesRepository, FavoritesRepository>();
+builder.Services.AddScoped<FavoritesService>();
 
 builder.Services.AddHttpClient<OpenLibraryClient>(client =>
 {
@@ -16,8 +18,7 @@ builder.Services.AddHttpClient<OpenLibraryClient>(client =>
 });
 
 builder.Services.AddScoped<BooksService>();
-builder.Services.AddScoped<FavoritesRepository>();
-builder.Services.AddScoped<FavoritesService>();
+// FavoritesRepository y FavoritesService ya quedaron registrados arriba.
 
 var app = builder.Build();
 
