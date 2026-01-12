@@ -37,6 +37,6 @@ CREATE UNIQUE INDEX UX_Favorites_User_External
 ON dbo.Favorites(UserId, ExternalId);
 GO
 
--- Seed: usuario fijo Id=1 (para simplificar la prueba)
+-- Seed: usuario fijo Id=1 (para simplificar)
 INSERT INTO dbo.Users (Name) VALUES ('Default User');
 GO
