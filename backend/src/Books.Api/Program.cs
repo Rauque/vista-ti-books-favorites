@@ -1,4 +1,5 @@
 using Books.Api.Clients;
+using Books.Api.Repositories;
 using Books.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,8 @@ builder.Services.AddHttpClient<OpenLibraryClient>(client =>
 });
 
 builder.Services.AddScoped<BooksService>();
+builder.Services.AddScoped<FavoritesRepository>();
+builder.Services.AddScoped<FavoritesService>();
 
 var app = builder.Build();
 
